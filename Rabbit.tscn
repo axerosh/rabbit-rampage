@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://images/rabbit.png" type="Texture" id=1]
+[ext_resource path="res://RabbitScript.gd" type="Script" id=2]
+[ext_resource path="res://images/rabbit-back.png" type="Texture" id=3]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "Front",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "Idle_Front",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10.5, 10 )
+
+[node name="KinematicBody2D" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "Idle_Front"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.5, 6 )
+shape = SubResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
