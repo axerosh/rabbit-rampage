@@ -8,6 +8,28 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Area2D",
+"class": "Carrot",
+"language": "GDScript",
+"path": "res://collectables/carrot.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Farmer",
+"language": "GDScript",
+"path": "res://humans/farmer.gd"
+}, {
+"base": "Area2D",
+"class": "Flesh",
+"language": "GDScript",
+"path": "res://collectables/flesh.gd"
+} ]
+_global_script_class_icons={
+"Carrot": "",
+"Farmer": "",
+"Flesh": ""
+}
+
 [application]
 
 config/name="Rabbit-rampage"
