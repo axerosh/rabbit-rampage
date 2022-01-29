@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "Flesh",
 "language": "GDScript",
 "path": "res://collectables/flesh.gd"
+}, {
+"base": "Navigation2D",
+"class": "LevelNavigation",
+"language": "GDScript",
+"path": "res://level_navigation.gd"
 } ]
 _global_script_class_icons={
 "Carrot": "",
 "Farmer": "",
-"Flesh": ""
+"Flesh": "",
+"LevelNavigation": ""
 }
 
 [application]
@@ -39,6 +45,7 @@ config/icon="res://icon.png"
 [autoload]
 
 DayNightManager="*res://autoload/day_night_manager.gd"
+Lookup="*res://autoload/lookup.gd"
 
 [display]
 
