@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://humans/spawn_zone.gd" type="Script" id=1]
 [ext_resource path="res://rabbit/Rabbit.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://images/house.png" type="Texture" id=8]
 [ext_resource path="res://images/normal_tiles.png" type="Texture" id=9]
 [ext_resource path="res://images/trees.png" type="Texture" id=10]
+[ext_resource path="res://audio/soundtrack.ogg" type="AudioStream" id=11]
 
 [sub_resource type="ConvexPolygonShape2D" id=7]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -395,3 +396,7 @@ position = Vector2( 52, 349 )
 script = ExtResource( 1 )
 width = 70.0
 height = 300.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+autoplay = true
