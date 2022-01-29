@@ -64,10 +64,14 @@ func _on_CollectionArea2D_area_entered(area: Area2D) -> void:
 		carrots_collected += 1
 		area.queue_free()
 		emit_signal("carrot_count_changed", carrots_collected)
+		$CarrotEatSound.stop()
+		$CarrotEatSound.play()
 	if (area is Flesh):
 		flesh_collected += 1
 		area.queue_free()
 		emit_signal("flesh_count_changed", flesh_collected)
+		$FleshEatSound.stop()
+		$FleshEatSound.play()
 
 
 func _on_HitBox_body_entered(body):

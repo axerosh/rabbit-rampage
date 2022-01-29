@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/carrot_chomp_solo.ogg-3faef861c08c27ccd5cc62a115b4dccd.oggstr"
+
+[deps]
+
+source_file="res://audio/carrot_chomp_solo.ogg"
+dest_files=[ "res://.import/carrot_chomp_solo.ogg-3faef861c08c27ccd5cc62a115b4dccd.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
