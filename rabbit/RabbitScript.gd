@@ -1,6 +1,37 @@
 extends KinematicBody2D
 
-var moveSpeed: int = 10000
+const level_stats: Dictionary = {
+	1: {
+		flesh_required = 0,
+		attack_damage = 1,
+		movement_speed = 10000.0,
+	},
+	2: {
+		flesh_required = 2,
+		attack_damage = 2,
+		movement_speed = 11000.0,
+	},
+	3: {
+		flesh_required = 5,
+		attack_damage = 3,
+		movement_speed = 12500.0,
+	},
+	4: {
+		flesh_required = 9,
+		attack_damage = 5,
+		movement_speed = 14500.0,
+	},
+	5: {
+		flesh_required = 14,
+		attack_damage = 7,
+		movement_speed = 17000.0,
+	},
+	6: {
+		flesh_required = 20,
+		attack_damage = 10,
+		movement_speed = 20000.0,
+	},
+}
 
 export var monster_mode: bool = false
 var carrots_collected: int = 0
@@ -10,7 +41,10 @@ var velocity: Vector2 = Vector2()
 var facing_dir: Vector2 = Vector2(0, 1)
 var hitbox_rot_degrees: float = 0
 var current_target: Human = null
+
+var level = 1;
 var attack_damage: int = 1
+var movement_speed: float = 10000.0
 
 signal carrot_count_changed(new_carrot_count)
 signal flesh_count_changed(new_flesh_count)
@@ -54,7 +88,7 @@ func _physics_process(delta: float) -> void:
 	
 	velocity = velocity.normalized()
 		
-	var _movement: Vector2 = move_and_slide(velocity * moveSpeed * delta)
+	var _movement: Vector2 = move_and_slide(velocity * movement_speed * delta)
 
 func _on_DayNightManager_day_night_changed(is_night: bool) -> void:
 	monster_mode = is_night
@@ -69,9 +103,21 @@ func _on_CollectionArea2D_area_entered(area: Area2D) -> void:
 	if (area is Flesh):
 		flesh_collected += 1
 		area.queue_free()
+		try_evolve()
 		emit_signal("flesh_count_changed", flesh_collected)
 		$FleshEatSound.stop()
 		$FleshEatSound.play()
+
+func try_evolve():
+	var next_level = level + 1
+	if (!level_stats.has(next_level)):
+		return
+	var next_level_stats = level_stats[next_level]
+	if (flesh_collected >= next_level_stats.flesh_required):
+		flesh_collected -= next_level_stats.flesh_required
+		level = next_level
+		attack_damage = next_level_stats.attack_damage
+		movement_speed = next_level_stats.movement_speed
 
 func _on_current_target_died(human: Human) -> void:
 	if (human == current_target):
