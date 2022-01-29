@@ -17,6 +17,7 @@ signal flesh_count_changed(new_flesh_count)
 
 func _ready() -> void:
 	var _result = DayNightManager.connect("day_night_changed", self, "_on_DayNightManager_day_night_changed")
+	monster_mode = DayNightManager.is_night
 
 func _exit_tree() -> void:
 	DayNightManager.disconnect("day_night_changed", self, "_on_DayNightManager_day_night_changed")
@@ -43,6 +44,7 @@ func _physics_process(delta: float) -> void:
 		hitbox_rot_degrees = 270
 		
 	$HitBox.rotation_degrees = hitbox_rot_degrees
+	$HitBox.visible = monster_mode
 	if Input.is_action_pressed("attack") and monster_mode and current_target != null:
 		current_target.drop_dead()
 	
@@ -51,6 +53,7 @@ func _physics_process(delta: float) -> void:
 	var _movement: Vector2 = move_and_slide(velocity * moveSpeed * delta)
 
 func _on_DayNightManager_day_night_changed(is_night: bool) -> void:
+	monster_mode = is_night
 	if (is_night):
 		print("Is night, should turn into monster")
 	else:
