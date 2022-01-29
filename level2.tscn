@@ -362,9 +362,9 @@ resource_local_to_scene = true
 6/z_index = 0
 
 [sub_resource type="NavigationPolygon" id=6]
-vertices = PoolVector2Array( 26, 17, 216, 13, 218, 229, 29, 592, 1004, 591, 444, 260, 444, 227, 636, 264, 805, 261, 1006, 28, 807, 29 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 4, 3, 2, 5 ), PoolIntArray( 2, 6, 5 ), PoolIntArray( 4, 5, 7 ), PoolIntArray( 4, 7, 8 ), PoolIntArray( 9, 4, 8, 10 ) ]
-outlines = [ PoolVector2Array( 26, 17, 216, 13, 218, 229, 444, 227, 444, 260, 636, 264, 805, 261, 807, 29, 1006, 28, 1004, 591, 29, 592 ) ]
+vertices = PoolVector2Array( 638, 260, 840, 438, 843, 567, 173, 566, 172, 439, 444, 260, 1002, 256, 1006, 438, 26, 439, 28, 226, 444, 227 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 6, 7, 1, 0 ), PoolIntArray( 4, 8, 9, 10, 5 ) ]
+outlines = [ PoolVector2Array( 172, 439, 26, 439, 28, 226, 444, 227, 444, 260, 638, 260, 1002, 256, 1006, 438, 840, 438, 843, 567, 173, 566 ) ]
 
 [node name="Game" type="Node2D"]
 
@@ -422,18 +422,23 @@ height = 70.0
 script = ExtResource( 6 )
 scene_to_spawn = ExtResource( 5 )
 
+[node name="SpawnZone" type="Node2D" parent="BanditManager"]
+position = Vector2( 108, 507 )
+script = ExtResource( 1 )
+height = 70.0
+
 [node name="SpawnZone2" type="Node2D" parent="BanditManager"]
-position = Vector2( 582, 521 )
+position = Vector2( 905, 506 )
 script = ExtResource( 1 )
 height = 70.0
 
 [node name="SpawnZone3" type="Node2D" parent="BanditManager"]
-position = Vector2( 908, 110 )
+position = Vector2( 916, 97 )
 script = ExtResource( 1 )
 height = 70.0
 
 [node name="SpawnZone4" type="Node2D" parent="BanditManager"]
-position = Vector2( 110, 122 )
+position = Vector2( 103, 95 )
 script = ExtResource( 1 )
 height = 70.0
 
