@@ -10,7 +10,7 @@ var velocity: Vector2 = Vector2()
 var facing_dir: Vector2 = Vector2(0, 1)
 var hitbox_rot_degrees: float = 0
 
-var current_target: Farmer = null
+var current_target: Human = null
 
 signal carrot_count_changed(new_carrot_count)
 signal flesh_count_changed(new_flesh_count)
@@ -54,10 +54,6 @@ func _physics_process(delta: float) -> void:
 
 func _on_DayNightManager_day_night_changed(is_night: bool) -> void:
 	monster_mode = is_night
-	if (is_night):
-		print("Is night, should turn into monster")
-	else:
-		print("Is day, should turn into bunny")
 
 func _on_CollectionArea2D_area_entered(area: Area2D) -> void:
 	if (area is Carrot):
@@ -73,12 +69,20 @@ func _on_CollectionArea2D_area_entered(area: Area2D) -> void:
 		$FleshEatSound.stop()
 		$FleshEatSound.play()
 
+func _on_current_target_died(human: Human) -> void:
+	if (human == current_target):
+		current_target = null
 
 func _on_HitBox_body_entered(body):
-	if (body is Farmer):
-		current_target = (body as Farmer)
+	if (body is Human):
+		var human: Human = body as Human
+		if (!human.is_dead):
+			current_target = human
+			var _result = current_target.connect("died", self, "_on_current_target_died")
 
 
 func _on_HitBox_body_exited(body):
-	if (body is Farmer):
-		current_target = null
+	if (body is Human):
+		if (body as Human == current_target):
+			current_target.disconnect("died", self, "_on_current_target_died")
+			current_target = null

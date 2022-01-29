@@ -57,6 +57,7 @@ drag_margin_bottom = 0.15
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 
 [node name="NightOverlay" type="TextureRect" parent="Camera2D/CanvasLayer"]
+visible = false
 margin_right = 1024.0
 margin_bottom = 600.0
 texture = ExtResource( 5 )

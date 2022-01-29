@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends Human
 class_name Farmer
 
 const flesh_scene: PackedScene = preload("res://collectables/flesh.tscn");
@@ -32,9 +32,9 @@ func move_along_path(distance: float):
 	var distance_to_next = start_point.distance_to(next_point)
 	var direction = (next_point - position).normalized()
 	if distance <= distance_to_next:
-		move_and_slide(direction * distance)
+		var _result = move_and_slide(direction * distance)
 	else:
-		move_and_slide(direction * (distance - distance_to_next))
+		var _result = move_and_slide(direction * (distance - distance_to_next))
 		walk_path.remove(0)
 
 
@@ -60,4 +60,4 @@ func drop_dead() -> void:
 	var flesh: Flesh = flesh_scene.instance();
 	get_tree().get_root().add_child(flesh);
 	flesh.global_position = self.global_position;
-	queue_free();
+	.drop_dead()

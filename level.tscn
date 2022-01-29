@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://images/tileset.png" type="Texture" id=1]
 [ext_resource path="res://rabbit/Rabbit.tscn" type="PackedScene" id=2]
 [ext_resource path="res://humans/farmer.tscn" type="PackedScene" id=3]
 [ext_resource path="res://level_navigation.gd" type="Script" id=4]
+[ext_resource path="res://humans/bandit.tscn" type="PackedScene" id=5]
 
 [sub_resource type="NavigationPolygon" id=4]
 vertices = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -106,4 +107,8 @@ scale = Vector2( 2, 2 )
 
 [node name="Farmer3" parent="." instance=ExtResource( 3 )]
 position = Vector2( 379, 294 )
+scale = Vector2( 2, 2 )
+
+[node name="Bandit" parent="." instance=ExtResource( 5 )]
+position = Vector2( 781, 464 )
 scale = Vector2( 2, 2 )

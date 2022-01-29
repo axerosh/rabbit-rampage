@@ -9,12 +9,17 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Human",
+"class": "Bandit",
+"language": "GDScript",
+"path": "res://humans/bandit.gd"
+}, {
 "base": "Area2D",
 "class": "Carrot",
 "language": "GDScript",
 "path": "res://collectables/carrot.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "Human",
 "class": "Farmer",
 "language": "GDScript",
 "path": "res://humans/farmer.gd"
@@ -24,15 +29,22 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://collectables/flesh.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "Human",
+"language": "GDScript",
+"path": "res://humans/human.gd"
+}, {
 "base": "Navigation2D",
 "class": "LevelNavigation",
 "language": "GDScript",
 "path": "res://level_navigation.gd"
 } ]
 _global_script_class_icons={
+"Bandit": "",
 "Carrot": "",
 "Farmer": "",
 "Flesh": "",
+"Human": "",
 "LevelNavigation": ""
 }
 
