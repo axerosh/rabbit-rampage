@@ -19,6 +19,7 @@ var carrots_dropped: int = 0;
 var walk_path: PoolVector2Array = PoolVector2Array([])
 
 func _ready() -> void:
+	GameManager.register_farmer(self)
 	var is_evil = false
 	init_health(2, is_evil)
 	var _result = connect("died", self, "on_death")
