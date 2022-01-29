@@ -3,13 +3,16 @@ class_name Bandit
 
 const speed: float = 4500.0
 const kill_range_squared: float = 2000.0
+const attack_cooldown_time: float = 2.0
 
 var current_target: Farmer = null
 var is_enabled: bool = true
+var time_until_attack: float = 0.0
 
 func _physics_process(delta: float) -> void:
 	if (!is_enabled):
 		return
+	time_until_attack -= delta
 	if (current_target == null):
 		choose_new_target()
 	if (current_target != null):
@@ -20,7 +23,8 @@ func _physics_process(delta: float) -> void:
 		var _movement: Vector2 = move_and_slide(direction * speed * speed_modifier * delta)
 		
 		var distance_squared: float = self.global_position.distance_squared_to(current_target.global_position)
-		if (distance_squared <= kill_range_squared):
+		if (distance_squared <= kill_range_squared && time_until_attack <= 0.0):
+			time_until_attack = attack_cooldown_time
 			current_target.drop_dead()
 
 func choose_new_target():
