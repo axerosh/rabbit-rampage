@@ -30,7 +30,7 @@ func init_zones() -> void:
 func on_DayNightManager_day_night_changed(_is_night: bool):
 	if not _is_night:
 		var spawn_count = ceil(GameManager.farmers.size() / 2.0)
-		for i in range(spawn_count):
+		for _i in range(spawn_count):
 			spawn_at_random_position()
 
 func spawn_at_random_position() -> void:

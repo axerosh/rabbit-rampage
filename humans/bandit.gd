@@ -34,12 +34,13 @@ func _physics_process(delta: float) -> void:
 func choose_new_target():
 	var closest_farmer: Farmer = null
 	var closest_distance_squared: float = 10000000.0
-	for potential_farmer in GameManager.farmers:
-		if potential_farmer is Farmer and !potential_farmer.is_dead:
-			var distance_squared: float = self.global_position.distance_squared_to(potential_farmer.global_position)
+	for farmer in GameManager.farmers:
+		farmer = farmer as Farmer
+		if !farmer.is_dead:
+			var distance_squared: float = self.global_position.distance_squared_to(farmer.global_position)
 			if (distance_squared < closest_distance_squared):
 				closest_distance_squared = distance_squared
-				closest_farmer = potential_farmer
+				closest_farmer = farmer
 	if (closest_farmer != null):
 		current_target = closest_farmer
 		var _result = current_target.connect("died", self, "_on_current_target_died")
