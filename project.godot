@@ -19,7 +19,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://collectables/carrot.gd"
 }, {
-"base": "Human",
+"base": "KinematicBody2D",
 "class": "Farmer",
 "language": "GDScript",
 "path": "res://humans/farmer.gd"

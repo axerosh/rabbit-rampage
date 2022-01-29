@@ -1,8 +1,12 @@
 extends TextureRect
 
-func _ready() -> void:
-	visible = DayNightManager.is_night
-	DayNightManager.night_overlay = self
+export var playback_speed: float = 1
 
-func _exit_tree():
-	DayNightManager.night_overlay = null
+func _init():
+	DayNightManager.is_night = false
+
+func _ready() -> void:
+	$AnimationPlayer.play("TimeOverlay", -1, playback_speed)
+
+func _set_night(night: bool):
+	DayNightManager.signal_night(night)
