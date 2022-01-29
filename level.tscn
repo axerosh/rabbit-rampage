@@ -82,7 +82,7 @@ vertices = PoolVector2Array( 364, 50, 994, 38, 991, 552, 365, 166, 31, 555, 206,
 polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 3, 2, 4, 5 ), PoolIntArray( 4, 6, 5 ), PoolIntArray( 3, 5, 7 ) ]
 outlines = [ PoolVector2Array( 29, 214, 206, 214, 208, 169, 365, 166, 364, 50, 994, 38, 991, 552, 31, 555 ) ]
 
-[node name="Game" type="Node2D"]
+[node name="Game2" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 3 )
