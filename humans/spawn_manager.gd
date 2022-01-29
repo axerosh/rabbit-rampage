@@ -17,7 +17,7 @@ func _ready() -> void:
 	init_zones()
 	var _result = DayNightManager.connect("day_night_changed", self, "on_DayNightManager_day_night_changed")
 	
-	test_spawn_all_corners()
+	#test_spawn_all_corners()
 
 func init_zones() -> void:
 	spawn_zones.clear()

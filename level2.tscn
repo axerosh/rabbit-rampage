@@ -386,29 +386,20 @@ height = 70.0
 script = ExtResource( 6 )
 scene_to_spawn = ExtResource( 5 )
 
-[node name="BanditSpawnZone" type="Node2D" parent="BanditManager"]
-position = Vector2( 274, 276 )
+[node name="SpawnZone2" type="Node2D" parent="BanditManager"]
+position = Vector2( 582, 521 )
 script = ExtResource( 1 )
-width = 630.0
 height = 70.0
 
-[node name="BanditSpawnZone2" type="Node2D" parent="BanditManager"]
-position = Vector2( 967, 303 )
+[node name="SpawnZone3" type="Node2D" parent="BanditManager"]
+position = Vector2( 908, 110 )
 script = ExtResource( 1 )
-width = 70.0
-height = 400.0
-
-[node name="BanditSpawnZone3" type="Node2D" parent="BanditManager"]
-position = Vector2( 516, 535 )
-script = ExtResource( 1 )
-width = 970.0
 height = 70.0
 
-[node name="BanditSpawnZone4" type="Node2D" parent="BanditManager"]
-position = Vector2( 52, 349 )
+[node name="SpawnZone4" type="Node2D" parent="BanditManager"]
+position = Vector2( 110, 122 )
 script = ExtResource( 1 )
-width = 70.0
-height = 300.0
+height = 70.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
