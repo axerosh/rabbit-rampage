@@ -49,14 +49,11 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1, 6.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 6.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [ false ],
 "method": "_set_night"
-}, {
-"args": [  ],
-"method": "_notify_new_day"
 }, {
 "args": [ true ],
 "method": "_set_night"
@@ -95,7 +92,7 @@ drag_margin_bottom = 0.15
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 
 [node name="NightOverlay" type="TextureRect" parent="Camera2D/CanvasLayer"]
-modulate = Color( 0.493428, 0.248753, 0.134493, 0 )
+modulate = Color( 0.454902, 0.333333, 0.054902, 0.313726 )
 margin_right = 1024.0
 margin_bottom = 600.0
 texture = ExtResource( 5 )
