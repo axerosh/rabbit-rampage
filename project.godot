@@ -19,7 +19,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://collectables/carrot.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "Human",
 "class": "Farmer",
 "language": "GDScript",
 "path": "res://humans/farmer.gd"
@@ -38,6 +38,16 @@ _global_script_classes=[ {
 "class": "LevelNavigation",
 "language": "GDScript",
 "path": "res://level_navigation.gd"
+}, {
+"base": "Node2D",
+"class": "SpawnManager",
+"language": "GDScript",
+"path": "res://humans/spawn_manager.gd"
+}, {
+"base": "Node2D",
+"class": "SpawnZone",
+"language": "GDScript",
+"path": "res://humans/spawn_zone.gd"
 } ]
 _global_script_class_icons={
 "Bandit": "",
@@ -45,7 +55,9 @@ _global_script_class_icons={
 "Farmer": "",
 "Flesh": "",
 "Human": "",
-"LevelNavigation": ""
+"LevelNavigation": "",
+"SpawnManager": "",
+"SpawnZone": ""
 }
 
 [application]

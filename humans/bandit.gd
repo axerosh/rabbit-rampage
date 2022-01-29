@@ -5,8 +5,11 @@ const speed: float = 4500.0
 const kill_range_squared: float = 2000.0
 
 var current_target: Farmer = null
+var is_enabled: bool = true
 
 func _physics_process(delta: float) -> void:
+	if (!is_enabled):
+		return
 	if (current_target == null):
 		choose_new_target()
 	if (current_target != null):
