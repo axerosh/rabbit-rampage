@@ -8,6 +8,11 @@ const attack_cooldown_time: float = 2.0
 var current_target: Farmer = null
 var is_enabled: bool = true
 var time_until_attack: float = 0.0
+var attack_damage: int = 1
+
+func _ready() -> void:
+	var is_evil = true
+	init_health(2, is_evil)
 
 func _physics_process(delta: float) -> void:
 	if (!is_enabled):
@@ -25,7 +30,7 @@ func _physics_process(delta: float) -> void:
 		var distance_squared: float = self.global_position.distance_squared_to(current_target.global_position)
 		if (distance_squared <= kill_range_squared && time_until_attack <= 0.0):
 			time_until_attack = attack_cooldown_time
-			current_target.drop_dead()
+			current_target.damage(attack_damage)
 
 func choose_new_target():
 	var closest_farmer: Farmer = null

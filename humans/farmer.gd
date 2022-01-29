@@ -18,10 +18,12 @@ var carrots_dropped: int = 0;
 
 var walk_path: PoolVector2Array = PoolVector2Array([])
 
+func _ready() -> void:
+	var is_evil = false
+	init_health(2, is_evil)
 
 func _physics_process(delta: float) -> void:
 	move_along_path(speed * delta)
-
 
 func move_along_path(distance: float):
 	if walk_path.size() == 0:
