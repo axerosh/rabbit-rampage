@@ -46,6 +46,8 @@ func move_along_path(distance: float):
 
 
 func _process(delta: float) -> void:
+	if !is_enabled:
+		return;
 	time_until_drop -= delta;
 	if (time_until_drop <= 0.0):
 		time_until_drop = time_between_drops;

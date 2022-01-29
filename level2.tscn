@@ -361,20 +361,34 @@ navpoly = SubResource( 6 )
 position = Vector2( 20, 20 )
 
 [node name="Farmer1" parent="." instance=ExtResource( 3 )]
+visible = false
 position = Vector2( 84, 227 )
 
 [node name="Farmer2" parent="." instance=ExtResource( 3 )]
+visible = false
 position = Vector2( 206, 422 )
 
 [node name="Farmer3" parent="." instance=ExtResource( 3 )]
+visible = false
 position = Vector2( 379, 294 )
 
+[node name="VillagerSpawner" type="Node2D" parent="."]
+script = ExtResource( 6 )
+scene_to_spawn = ExtResource( 3 )
+
+[node name="VillagerSpawnZone" type="Node2D" parent="VillagerSpawner"]
+position = Vector2( 688, 60 )
+script = ExtResource( 1 )
+width = 630.0
+height = 70.0
+
 [node name="BanditManager" type="Node2D" parent="."]
+visible = false
 script = ExtResource( 6 )
 scene_to_spawn = ExtResource( 5 )
 
 [node name="BanditSpawnZone" type="Node2D" parent="BanditManager"]
-position = Vector2( 688, 60 )
+position = Vector2( 274, 276 )
 script = ExtResource( 1 )
 width = 630.0
 height = 70.0

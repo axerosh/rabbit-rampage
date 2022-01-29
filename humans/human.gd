@@ -2,6 +2,7 @@ extends KinematicBody2D
 class_name Human
 
 var health: int = 2;
+export var is_enabled: bool = true
 
 signal died(human)
 var is_dead: bool = false;

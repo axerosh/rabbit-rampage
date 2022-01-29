@@ -6,7 +6,6 @@ const kill_range_squared: float = 2000.0
 const attack_cooldown_time: float = 2.0
 
 var current_target: Farmer = null
-var is_enabled: bool = true
 var time_until_attack: float = 0.0
 var attack_damage: int = 1
 

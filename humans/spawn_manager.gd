@@ -17,7 +17,7 @@ func _ready() -> void:
 	init_zones()
 	var _result = DayNightManager.connect("day_night_changed", self, "on_DayNightManager_day_night_changed")
 	
-	#test_spawn_all_corners()
+	test_spawn_all_corners()
 
 func init_zones() -> void:
 	spawn_zones.clear()
@@ -45,7 +45,7 @@ func spawn_at_random_position() -> void:
 		var spawn_zone = obj as SpawnZone
 		if (spawn_zone.acculumated_area > roll):
 			var spawn_point: Vector2 = spawn_zone.get_point_in_zone(rng)
-			var spawned_scene: Bandit = scene_to_spawn.instance()
+			var spawned_scene: Human = scene_to_spawn.instance()
 			add_child(spawned_scene)
 			spawned_scene.global_position = spawn_point
 			return
@@ -58,7 +58,7 @@ func test_spawn_all_corners() -> void:
 	for spawn_zone in get_children():
 		if (spawn_zone is SpawnZone):
 			for spawn_point in (spawn_zone as SpawnZone).get_corner_points():
-				var spawned_scene: Bandit = scene_to_spawn.instance()
+				var spawned_scene: Human = scene_to_spawn.instance()
 				spawned_scene.is_enabled = false
 				call_deferred("add_child", spawned_scene)
 				spawned_scene.global_position = spawn_point
