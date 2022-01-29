@@ -9,7 +9,6 @@ var flesh_collected: int = 0
 var velocity: Vector2 = Vector2()
 var facing_dir: Vector2 = Vector2(0, 1)
 var hitbox_rot_degrees: float = 0
-
 var current_target: Human = null
 
 signal carrot_count_changed(new_carrot_count)
@@ -45,8 +44,12 @@ func _physics_process(delta: float) -> void:
 		
 	$HitBox.rotation_degrees = hitbox_rot_degrees
 	$HitBox.visible = monster_mode
-	if Input.is_action_pressed("attack") and monster_mode and current_target != null:
+	if Input.is_action_pressed("attack") and monster_mode and current_target != null and carrots_collected > 0:
 		current_target.drop_dead()
+		carrots_collected -= 1
+		emit_signal("carrot_count_changed", carrots_collected)
+		$CarrotEatSound.stop()
+		$CarrotEatSound.play()
 	
 	velocity = velocity.normalized()
 		
@@ -78,7 +81,8 @@ func _on_HitBox_body_entered(body):
 		var human: Human = body as Human
 		if (!human.is_dead):
 			current_target = human
-			var _result = current_target.connect("died", self, "_on_current_target_died")
+			if (!current_target.is_connected("died", self, "_on_current_target_died")):
+				var _result = current_target.connect("died", self, "_on_current_target_died")
 
 
 func _on_HitBox_body_exited(body):
