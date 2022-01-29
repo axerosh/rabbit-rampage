@@ -1,0 +1,115 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://images/rabbit.png" type="Texture" id=1]
+[ext_resource path="res://images/rabbit-back.png" type="Texture" id=3]
+[ext_resource path="res://images/night_overlay.png" type="Texture" id=4]
+[ext_resource path="res://night_overlay.gd" type="Script" id=5]
+
+[sub_resource type="GDScript" id=4]
+script/source = "extends KinematicBody2D
+
+var moveSpeed: int = 10000
+
+var carrots_collected: int = 0
+var flesh_collected: int = 0
+
+var velocity: Vector2 = Vector2()
+var facingDir: Vector2 = Vector2(0, 1)
+
+func _ready() -> void:
+	DayNightManager.connect(\"day_night_changed\", self, \"_on_DayNightManager_day_night_changed\")
+
+func _exit_tree() -> void:
+	DayNightManager.disconnect(\"day_night_changed\", self, \"_on_DayNightManager_day_night_changed\")
+
+func _physics_process(delta: float) -> void:
+	
+	velocity = Vector2()
+	
+	if Input.is_action_pressed(\"move_up\"):
+		velocity.y -= 1
+		facingDir = Vector2(0, -1)
+	if Input.is_action_pressed(\"move_down\"):
+		velocity.y += 1
+		facingDir = Vector2(0, 1)
+	if Input.is_action_pressed(\"move_left\"):
+		velocity.x -= 1
+		facingDir = Vector2(-1, 0)
+	if Input.is_action_pressed(\"move_right\"):
+		velocity.x += 1
+		facingDir = Vector2(1, 0)
+		
+	velocity = velocity.normalized()
+		
+	var _movement: Vector2 = move_and_slide(velocity * moveSpeed * delta)
+
+func _on_DayNightManager_day_night_changed(is_night: bool) -> void:
+	if (is_night):
+		print(\"Is night, should turn into monster\")
+	else:
+		print(\"Is day, should turn into bunny\")
+
+func _on_CollectionArea2D_area_entered(area: Area2D) -> void:
+	if (area is Carrot):
+		carrots_collected += 1
+		print(\"Carrots collected: \" + str(carrots_collected))
+		area.queue_free()
+	if (area is Flesh):
+		flesh_collected += 1
+		print(\"Flesh collected: \" + str(flesh_collected))
+		area.queue_free()
+"
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "Front",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "Idle_Front",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10.5, 10 )
+
+[sub_resource type="CircleShape2D" id=3]
+
+[node name="KinematicBody2D" type="KinematicBody2D"]
+script = SubResource( 4 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "Idle_Front"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.5, 6 )
+shape = SubResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="NightOverlay" type="TextureRect" parent="Camera2D"]
+visible = false
+margin_left = -512.0
+margin_top = -300.0
+margin_right = 512.0
+margin_bottom = 300.0
+texture = ExtResource( 4 )
+expand = true
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollectionArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectionArea2D"]
+position = Vector2( -0.5, 6 )
+scale = Vector2( 2, 2 )
+shape = SubResource( 3 )
+
+[connection signal="area_entered" from="CollectionArea2D" to="." method="_on_CollectionArea2D_area_entered"]

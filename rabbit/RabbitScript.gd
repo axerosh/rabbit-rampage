@@ -12,7 +12,10 @@ signal carrot_count_changed(new_carrot_count)
 signal flesh_count_changed(new_flesh_count)
 
 func _ready() -> void:
-	pass # Replace with function body.
+	var _result = DayNightManager.connect("day_night_changed", self, "_on_DayNightManager_day_night_changed")
+
+func _exit_tree() -> void:
+	DayNightManager.disconnect("day_night_changed", self, "_on_DayNightManager_day_night_changed")
 
 func _physics_process(delta: float) -> void:
 	
@@ -34,6 +37,12 @@ func _physics_process(delta: float) -> void:
 	velocity = velocity.normalized()
 		
 	var _movement: Vector2 = move_and_slide(velocity * moveSpeed * delta)
+
+func _on_DayNightManager_day_night_changed(is_night: bool) -> void:
+	if (is_night):
+		print("Is night, should turn into monster")
+	else:
+		print("Is day, should turn into bunny")
 
 func _on_CollectionArea2D_area_entered(area: Area2D) -> void:
 	if (area is Carrot):
