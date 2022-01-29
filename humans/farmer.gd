@@ -21,6 +21,10 @@ var walk_path: PoolVector2Array = PoolVector2Array([])
 func _ready() -> void:
 	var is_evil = false
 	init_health(2, is_evil)
+	var _result = connect("died", self, "on_death")
+
+func on_death(_human: Human):
+	drop_flesh()
 
 func _physics_process(delta: float) -> void:
 	move_along_path(speed * delta)
@@ -58,8 +62,7 @@ func drop_carrot() -> void:
 	get_tree().get_root().add_child(carrot);
 	carrot.global_position = self.global_position;
 
-func drop_dead() -> void:
+func drop_flesh() -> void:
 	var flesh: Flesh = flesh_scene.instance();
 	get_tree().get_root().add_child(flesh);
 	flesh.global_position = self.global_position;
-	.drop_dead()
