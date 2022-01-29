@@ -46,7 +46,7 @@ func spawn_at_random_position() -> void:
 		if (spawn_zone.acculumated_area > roll):
 			var spawn_point: Vector2 = spawn_zone.get_point_in_zone(rng)
 			var spawned_scene: Bandit = scene_to_spawn.instance()
-			get_tree().root.add_child(spawned_scene)
+			add_child(spawned_scene)
 			spawned_scene.global_position = spawn_point
 			return
 
@@ -60,5 +60,5 @@ func test_spawn_all_corners() -> void:
 			for spawn_point in (spawn_zone as SpawnZone).get_corner_points():
 				var spawned_scene: Bandit = scene_to_spawn.instance()
 				spawned_scene.is_enabled = false
-				get_tree().root.call_deferred("add_child", spawned_scene)
+				call_deferred("add_child", spawned_scene)
 				spawned_scene.global_position = spawn_point
