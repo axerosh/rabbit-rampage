@@ -5,7 +5,6 @@ const flesh_scene: PackedScene = preload("res://collectables/flesh.tscn");
 const carrot_scene: PackedScene = preload("res://collectables/carrot.tscn");
 
 const time_between_drops: float = 2.0;
-const drops_before_death: int = 2;
 const speed: Vector2 = Vector2(4000, 0);
 
 var time_until_drop: float = time_between_drops;
@@ -18,11 +17,7 @@ func _process(delta: float) -> void:
 	time_until_drop -= delta;
 	if (time_until_drop <= 0.0):
 		time_until_drop = time_between_drops;
-		if (carrots_dropped < drops_before_death):
-			carrots_dropped += 1;
-			drop_carrot()
-		else:
-			drop_dead()
+		drop_carrot()
 
 func drop_carrot() -> void:
 	var carrot: Carrot = carrot_scene.instance();

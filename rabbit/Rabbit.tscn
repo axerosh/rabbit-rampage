@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://images/rabbit.png" type="Texture" id=1]
 [ext_resource path="res://rabbit/RabbitScript.gd" type="Script" id=2]
@@ -6,17 +6,18 @@
 [ext_resource path="res://gui/gui.tscn" type="PackedScene" id=4]
 [ext_resource path="res://images/night_overlay.png" type="Texture" id=5]
 [ext_resource path="res://night_overlay.gd" type="Script" id=6]
+[ext_resource path="res://images/collectable_carrot.png" type="Texture" id=7]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "Back",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
 "name": "Front",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "Idle_Front",
 "speed": 5.0
 } ]
 
@@ -25,12 +26,17 @@ extents = Vector2( 10.5, 10 )
 
 [sub_resource type="CircleShape2D" id=3]
 
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 6.0
+height = 24.0
+
 [node name="Rabbit" type="KinematicBody2D"]
 script = ExtResource( 2 )
+monster_mode = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-animation = "Idle_Front"
+animation = "Front"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.5, 6 )
@@ -67,6 +73,19 @@ position = Vector2( -0.5, 6 )
 scale = Vector2( 2, 2 )
 shape = SubResource( 3 )
 
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2( 0, 24 )
+shape = SubResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="HitBox"]
+position = Vector2( 0, 19.5 )
+scale = Vector2( 1, 2.8125 )
+texture = ExtResource( 7 )
+
 [connection signal="carrot_count_changed" from="." to="Camera2D/CanvasLayer/GUI" method="_on_Rabbit_carrot_count_changed"]
 [connection signal="flesh_count_changed" from="." to="Camera2D/CanvasLayer/GUI" method="_on_Rabbit_flesh_count_changed"]
 [connection signal="area_entered" from="CollectionArea2D" to="." method="_on_CollectionArea2D_area_entered"]
+[connection signal="body_entered" from="HitBox" to="." method="_on_HitBox_body_entered"]
+[connection signal="body_exited" from="HitBox" to="." method="_on_HitBox_body_exited"]
