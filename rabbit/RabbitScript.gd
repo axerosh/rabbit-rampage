@@ -8,6 +8,9 @@ var flesh_collected: int = 0
 var velocity: Vector2 = Vector2()
 var facingDir: Vector2 = Vector2(0, 1)
 
+signal carrot_count_changed(new_carrot_count)
+signal flesh_count_changed(new_flesh_count)
+
 func _ready() -> void:
 	pass # Replace with function body.
 
@@ -35,9 +38,9 @@ func _physics_process(delta: float) -> void:
 func _on_CollectionArea2D_area_entered(area: Area2D) -> void:
 	if (area is Carrot):
 		carrots_collected += 1
-		print("Carrots collected: " + str(carrots_collected))
 		area.queue_free()
+		emit_signal("carrot_count_changed", carrots_collected)
 	if (area is Flesh):
 		flesh_collected += 1
-		print("Flesh collected: " + str(flesh_collected))
 		area.queue_free()
+		emit_signal("flesh_count_changed", flesh_collected)
