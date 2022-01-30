@@ -1,6 +1,8 @@
 extends Node2D
 class_name BgmPlayer
 
+var is_night: bool = false
+
 func _ready():
 	$AnimationPlayer.playback_speed = 0.5
 	if DayNightManager.is_night:
@@ -15,7 +17,11 @@ func _ready():
 func _exit_tree():
 	DayNightManager.disconnect("day_night_changed", self, "_day_night_changed")
 
-func _day_night_changed(is_night: bool):
+func _day_night_changed(new_is_night: bool):
+	if (new_is_night == is_night):
+		return
+	
+	is_night = new_is_night
 	if is_night:
 		$AnimationPlayer.play("FadeToNight")
 	else:
