@@ -79,19 +79,23 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_pressed("move_up"):
 		velocity.y -= 1
+		$Sprite.frame = 3
 		facing_dir = Vector2(0, -1)
 		hitbox_rot_degrees = 180
 	if Input.is_action_pressed("move_down"):
 		velocity.y += 1
 		facing_dir = Vector2(0, 1)
+		$Sprite.frame = 2
 		hitbox_rot_degrees = 0
 	if Input.is_action_pressed("move_left"):
 		velocity.x -= 1
 		facing_dir = Vector2(-1, 0)
+		$Sprite.frame = 1
 		hitbox_rot_degrees = 90
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
 		facing_dir = Vector2(1, 0)
+		$Sprite.frame = 0
 		hitbox_rot_degrees = 270
 		
 	$HitBox.rotation_degrees = hitbox_rot_degrees
@@ -102,6 +106,7 @@ func _physics_process(delta: float) -> void:
 		emit_signal("carrot_count_changed", carrots_collected)
 		$CarrotEatSound.stop()
 		$CarrotEatSound.play()
+		$AnimationPlayer.play("StabbyMacStabface", -1)
 	
 	velocity = velocity.normalized()
 		
@@ -145,6 +150,8 @@ func try_evolve():
 		
 		next_level = level + 1
 		$LevelUpParticles.emitting = true
+		$LevelUpSound.stop()
+		$LevelUpSound.play()
 		if (!level_stats.has(next_level)):
 			emit_signal("final_leveled_up", level, speed_factor, attack_damage, attack_cost)
 		else:

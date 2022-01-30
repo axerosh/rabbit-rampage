@@ -25,6 +25,7 @@ func damage(damage: int) -> void:
 		$HealthBar.visible = false
 		$CollisionShape2D.disabled = true
 		$DeathParticles.emitting = true
+		$DeathSound.play()
 		yield(get_tree().create_timer(1.0), "timeout")
 		queue_free()
 
