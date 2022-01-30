@@ -3,6 +3,7 @@ class_name SpawnZone
 
 export var width: float = 100.0
 export var height: float = 100.0
+export var disabled: bool = false
 
 var acculumated_area: float = 0.0
 

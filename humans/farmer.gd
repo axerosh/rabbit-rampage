@@ -30,9 +30,13 @@ func on_death(_human: Human):
 	drop_flesh()
 
 func _physics_process(delta: float) -> void:
+	if !is_enabled:
+		return;
 	var closest_nearby_pursuer: Human = null
 	var closest_distance_squared: float = pursuer_detection_range_squared
 	for pursuer in pursuers:
+		if not is_instance_valid(pursuer):
+			continue
 		pursuer = pursuer as Human
 		var distance_squared: float = self.global_position.distance_squared_to(pursuer.global_position)
 		if (distance_squared < closest_distance_squared):
@@ -88,7 +92,9 @@ func set_haunted(pursuer: Human) -> void:
 		var _error = pursuer.connect("died", self, "on_pursuer_died")
 
 func on_pursuer_died(pursuer: Human) -> void:
-	print("pursuer " + str(pursuer) + " died")
+	var time = OS.get_time()
+	var time_return = String(time.hour) +":"+String(time.minute)+":"+String(time.second)
+	print(time_return + ": pursuer " + str(pursuer) + " died")
 	if (pursuers.has(pursuer)):
 		pursuers.erase(pursuer)
 	if (pursuer.is_connected("died", self, "on_pursuer_died")):

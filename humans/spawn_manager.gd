@@ -25,9 +25,10 @@ func init_zones() -> void:
 	for potential_spawn_zone in get_children():
 		if (potential_spawn_zone is SpawnZone):
 			var spawn_zone: SpawnZone = potential_spawn_zone as SpawnZone
-			spawn_zones.append(spawn_zone)
-			total_area += spawn_zone.get_area()
-			spawn_zone.acculumated_area = total_area
+			if not spawn_zone.disabled:
+				spawn_zones.append(spawn_zone)
+				total_area += spawn_zone.get_area()
+				spawn_zone.acculumated_area = total_area
 
 func on_DayNightManager_day_night_changed(_is_night: bool):
 	time_until_spawn = 0.0
