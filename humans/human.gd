@@ -14,7 +14,17 @@ func init_health(max_health: int, is_evil: bool):
 func damage(damage: int) -> void:
 	health -= damage
 	$HealthBar.set_current_health(health)
+	$BloodParticles.emitting = true
 	if (health <= 0):
 		is_dead = true
 		emit_signal("died", self)
-		queue_free();
+		$Sprite.visible = false
+		is_enabled = false
+		$HealthBar.visible = false
+		$CollisionShape2D.disabled = true
+		$DeathParticles.emitting = true
+		yield(get_tree().create_timer(1.0), "timeout")
+		queue_free()
+
+func set_sweating(sweating: bool):
+	$SweatParticles.emitting = sweating
