@@ -4,32 +4,38 @@ const level_stats: Dictionary = {
 	1: {
 		flesh_required = 0,
 		attack_damage = 1,
-		movement_speed = 10000.0,
+		attack_cost = 1,
+		speed_factor = 1.0,
 	},
 	2: {
 		flesh_required = 2,
 		attack_damage = 2,
-		movement_speed = 11000.0,
+		attack_cost = 1,
+		speed_factor = 1.1,
 	},
 	3: {
 		flesh_required = 5,
 		attack_damage = 3,
-		movement_speed = 12500.0,
+		attack_cost = 1,
+		speed_factor = 1.25,
 	},
 	4: {
 		flesh_required = 9,
 		attack_damage = 5,
-		movement_speed = 14500.0,
+		attack_cost = 1,
+		speed_factor = 1.45,
 	},
 	5: {
 		flesh_required = 14,
 		attack_damage = 7,
-		movement_speed = 17000.0,
+		attack_cost = 1,
+		speed_factor = 1.7,
 	},
 	6: {
 		flesh_required = 20,
 		attack_damage = 10,
-		movement_speed = 20000.0,
+		attack_cost = 1,
+		speed_factor = 2.0,
 	},
 }
 
@@ -42,10 +48,15 @@ var facing_dir: Vector2 = Vector2(0, 1)
 var hitbox_rot_degrees: float = 0
 var current_target: Human = null
 
-var level = 1;
+const base_speed: float = 10000.0
+var is_first_update: bool = true
+var level: int = 0;
 var attack_damage: int = 1
-var movement_speed: float = 10000.0
+var speed_factor: float = 1.0
 
+
+signal leveled_up(level, speed, damage, carrot_cost, next_flesh_cost, next_level, next_speed, next_damage, next_carrot_cost)
+signal final_leveled_up(level, speed, damage, carrot_cost)
 signal carrot_count_changed(new_carrot_count)
 signal flesh_count_changed(new_flesh_count)
 
@@ -57,6 +68,9 @@ func _exit_tree() -> void:
 	DayNightManager.disconnect("day_night_changed", self, "_on_DayNightManager_day_night_changed")
 
 func _physics_process(delta: float) -> void:
+	if (is_first_update):
+		is_first_update = false
+		try_evolve()
 	
 	velocity = Vector2()
 	
@@ -88,7 +102,7 @@ func _physics_process(delta: float) -> void:
 	
 	velocity = velocity.normalized()
 		
-	var _movement: Vector2 = move_and_slide(velocity * movement_speed * delta)
+	var _movement: Vector2 = move_and_slide(velocity * base_speed * speed_factor * delta)
 
 func _on_DayNightManager_day_night_changed(is_night: bool) -> void:
 	monster_mode = is_night
@@ -117,7 +131,19 @@ func try_evolve():
 		flesh_collected -= next_level_stats.flesh_required
 		level = next_level
 		attack_damage = next_level_stats.attack_damage
-		movement_speed = next_level_stats.movement_speed
+		var attack_cost: int = next_level_stats.attack_cost
+		speed_factor = next_level_stats.speed_factor
+		
+		next_level = level + 1
+		if (!level_stats.has(next_level)):
+			emit_signal("final_leveled_up", level, speed_factor, attack_damage, attack_cost)
+		else:
+			next_level_stats = level_stats[next_level]
+			var next_flesh_required: int = next_level_stats.flesh_required
+			var next_attack_damage: int = next_level_stats.attack_damage
+			var next_attack_cost: int = next_level_stats.attack_cost
+			var next_speed_factor: float = next_level_stats.speed_factor
+			emit_signal("leveled_up", level, speed_factor, attack_damage, attack_cost, next_flesh_required, next_level, next_speed_factor, next_attack_damage, next_attack_cost)
 
 func _on_current_target_died(human: Human) -> void:
 	if (human == current_target):

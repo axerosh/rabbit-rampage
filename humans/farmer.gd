@@ -56,6 +56,7 @@ func move_away_from(from_point: Vector2, distance: float):
 	
 	while (!walk_path.empty()):
 		walk_path.remove(0)
+		waiting_time = 0
 
 func move_along_path(distance: float):
 	if walk_path.size() == 0:
