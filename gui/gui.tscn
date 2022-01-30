@@ -124,10 +124,10 @@ __meta__ = {
 }
 
 [node name="Unit" type="TextureRect" parent="Leveling/Current/CarrotCount"]
-margin_top = 8.0
 margin_right = 16.0
-margin_bottom = 16.0
+margin_bottom = 28.0
 texture = ExtResource( 1 )
+stretch_mode = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -183,10 +183,10 @@ __meta__ = {
 }
 
 [node name="Unit" type="TextureRect" parent="Leveling/LevelUp/FleshCounter"]
-margin_top = 8.0
 margin_right = 16.0
-margin_bottom = 24.0
+margin_bottom = 28.0
 texture = ExtResource( 2 )
+stretch_mode = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -317,12 +317,11 @@ __meta__ = {
 }
 
 [node name="Unit" type="TextureRect" parent="Leveling/Next/GridContainer/Cost"]
-anchor_top = 0.261
-anchor_bottom = 0.261
 margin_left = 14.0
 margin_right = 30.0
-margin_bottom = 16.0
+margin_bottom = 28.0
 texture = ExtResource( 1 )
+stretch_mode = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -361,8 +360,9 @@ __meta__ = {
 [node name="VillagersUnit" type="TextureRect" parent="Village"]
 margin_left = 119.0
 margin_right = 139.0
-margin_bottom = 21.0
+margin_bottom = 28.0
 texture = ExtResource( 6 )
+stretch_mode = 4
 
 [node name="BirthsLabel" type="Label" parent="Village"]
 margin_top = 32.0
@@ -391,8 +391,9 @@ __meta__ = {
 margin_left = 119.0
 margin_top = 32.0
 margin_right = 139.0
-margin_bottom = 53.0
+margin_bottom = 60.0
 texture = ExtResource( 6 )
+stretch_mode = 4
 
 [node name="Time" type="HBoxContainer" parent="."]
 margin_left = 2.0
