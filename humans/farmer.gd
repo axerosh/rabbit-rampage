@@ -6,9 +6,10 @@ const carrot_scene: PackedScene = preload("res://collectables/carrot.tscn");
 
 const min_time_between_drops: float = 2.0;
 const max_time_between_drops: float = 10.0;
-const speed: float = 4000.0
+const speed: float = 3000.0
 const min_time_waiting: float = 0.5;
 const max_time_waiting: float = 3.5;
+const pursuer_detection_range_squared: float = 10000.0;
 
 var time_between_drops: float = rand_range(min_time_between_drops, max_time_between_drops)
 var time_until_drop: float = time_between_drops
@@ -17,6 +18,7 @@ var waiting_time: float = rand_range(min_time_waiting, max_time_waiting)
 var carrots_dropped: int = 0;
 
 var walk_path: PoolVector2Array = PoolVector2Array([])
+var pursuers: Array = []
 
 func _ready() -> void:
 	GameManager.register_farmer(self)
@@ -28,7 +30,26 @@ func on_death(_human: Human):
 	drop_flesh()
 
 func _physics_process(delta: float) -> void:
-	move_along_path(speed * delta)
+	var closest_nearby_pursuer: Human = null
+	var closest_distance_squared: float = pursuer_detection_range_squared
+	for pursuer in pursuers:
+		pursuer = pursuer as Human
+		var distance_squared: float = self.global_position.distance_squared_to(pursuer.global_position)
+		if (distance_squared < closest_distance_squared):
+			closest_distance_squared = distance_squared
+			closest_nearby_pursuer = pursuer
+	
+	if (closest_nearby_pursuer != null):
+		move_away_from(closest_nearby_pursuer.global_position, speed * delta)
+	else:
+		move_along_path(speed * delta)
+
+func move_away_from(from_point: Vector2, distance: float):
+	var direction = (global_position - from_point).normalized()
+	var _result = move_and_slide(direction * distance)
+	
+	while (!walk_path.empty()):
+		walk_path.remove(0)
 
 func move_along_path(distance: float):
 	if walk_path.size() == 0:
@@ -57,8 +78,21 @@ func _process(delta: float) -> void:
 		if waiting_time > 0:
 			waiting_time -= delta
 		elif waiting_time <= 0:
-			walk_path = Lookup.find_LevelNavigation().get_random_walk_path(position)
+			walk_path = Lookup.find_LevelNavigation().get_random_walk_path(global_position)
 			waiting_time = rand_range(min_time_waiting, max_time_waiting)
+
+func set_haunted(pursuer: Human) -> void:
+	if (!pursuers.has(pursuer)):
+		pursuers.append(pursuer)
+	if (!pursuer.is_connected("died", self, "on_pursuer_died")):
+		var _error = pursuer.connect("died", self, "on_pursuer_died")
+
+func on_pursuer_died(pursuer: Human) -> void:
+	print("pursuer " + str(pursuer) + " died")
+	if (pursuers.has(pursuer)):
+		pursuers.erase(pursuer)
+	if (pursuer.is_connected("died", self, "on_pursuer_died")):
+		pursuer.disconnect("died", self, "on_pursuer_died")
 
 func drop_carrot() -> void:
 	var carrot: Carrot = carrot_scene.instance();

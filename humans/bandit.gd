@@ -23,7 +23,7 @@ func _physics_process(delta: float) -> void:
 		var direction: Vector2 = self.global_position.direction_to(current_target.global_position)
 		var speed_modifier: float = 1.0
 		if (!DayNightManager.is_night):
-			speed_modifier = 0.5
+			speed_modifier = 0.75
 		var _movement: Vector2 = move_and_slide(direction * speed * speed_modifier * delta)
 		
 		var distance_squared: float = self.global_position.distance_squared_to(current_target.global_position)
@@ -43,6 +43,7 @@ func choose_new_target():
 				closest_farmer = farmer
 	if (closest_farmer != null):
 		current_target = closest_farmer
+		closest_farmer.set_haunted(self as Human)
 		var _result = current_target.connect("died", self, "_on_current_target_died")
 
 func _on_current_target_died(human: Human) -> void:
