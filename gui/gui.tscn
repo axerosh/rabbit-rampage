@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://images/carrot.png" type="Texture" id=1]
 [ext_resource path="res://images/flesh.png" type="Texture" id=2]
 [ext_resource path="res://gui/GuiUpdater.gd" type="Script" id=3]
 [ext_resource path="res://images/night_overlay.png" type="Texture" id=4]
 [ext_resource path="res://gui/gameover_overlay.gd" type="Script" id=5]
+[ext_resource path="res://images/human_farmer_head.png" type="Texture" id=6]
 
 [node name="GUI" type="Control"]
 anchor_right = 1.0
@@ -326,6 +327,73 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Village" type="GridContainer" parent="."]
+margin_left = 10.0
+margin_top = 113.0
+margin_right = 102.0
+margin_bottom = 145.0
+columns = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VillagersLabel" type="Label" parent="Village"]
+margin_right = 58.0
+margin_bottom = 14.0
+text = "Villagers:"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VillagersValue" type="Label" parent="Village"]
+margin_left = 62.0
+margin_right = 78.0
+margin_bottom = 14.0
+text = "1"
+align = 2
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VillagersUnit" type="TextureRect" parent="Village"]
+margin_left = 82.0
+margin_right = 92.0
+margin_bottom = 14.0
+texture = ExtResource( 6 )
+
+[node name="BirthsLabel" type="Label" parent="Village"]
+margin_top = 18.0
+margin_right = 58.0
+margin_bottom = 32.0
+text = "Births:"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BirthsValue" type="Label" parent="Village"]
+margin_left = 62.0
+margin_top = 18.0
+margin_right = 78.0
+margin_bottom = 32.0
+text = "+1"
+align = 2
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BirthsUnit" type="TextureRect" parent="Village"]
+margin_left = 82.0
+margin_top = 18.0
+margin_right = 92.0
+margin_bottom = 32.0
+texture = ExtResource( 6 )
+
 [node name="GameoverOverlay" type="TextureRect" parent="."]
 visible = false
 self_modulate = Color( 0, 0, 0, 1 )
@@ -364,6 +432,50 @@ margin_bottom = 42.0
 rect_scale = Vector2( 2, 2 )
 text = "Press R to restart"
 align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Time" type="HBoxContainer" parent="."]
+margin_left = 10.0
+margin_top = 155.0
+margin_right = 102.0
+margin_bottom = 187.0
+
+[node name="Night" type="HBoxContainer" parent="Time"]
+margin_right = 54.0
+margin_bottom = 32.0
+
+[node name="Label" type="Label" parent="Time/Night"]
+margin_top = 9.0
+margin_right = 42.0
+margin_bottom = 23.0
+text = "Night"
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="Label" parent="Time/Night"]
+margin_left = 46.0
+margin_top = 9.0
+margin_right = 54.0
+margin_bottom = 23.0
+text = "1"
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Imminent" type="Label" parent="Time"]
+margin_left = 58.0
+margin_top = 9.0
+margin_right = 121.0
+margin_bottom = 23.0
+text = "imminent"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
