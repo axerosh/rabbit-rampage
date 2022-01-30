@@ -31,10 +31,16 @@ func _on_Rabbit_flesh_count_changed(new_flesh_count: int):
 	$Leveling/LevelUp/FleshCounter/CountValue.text = "%d" % new_flesh_count
 
 func _on_DayNightManager_day_night_changed(is_night: bool):
-	$Time/Imminent.visible = !is_night
+	if (GameManager.night_counter == 0):
+		$Time/Imminent.visible = !is_night
+		$Time/Cleared.visible = false
+	else:
+		$Time/Imminent.visible = false
+		$Time/Cleared.visible = !is_night
 
 func _on_GameManager_night_count_changed(night_count: int):
 	$Time/Night/Value.text = "%d" % night_count
+	$GameoverOverlay/Content/NightCounter/Value.text = "%d" % night_count
 
 func _on_GameManager_villager_count_changed(villager_count: int, birth_count: int):
 	$Village/VillagersValue.text = "%d" % villager_count

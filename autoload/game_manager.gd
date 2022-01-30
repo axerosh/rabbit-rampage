@@ -38,6 +38,6 @@ func set_gameover_status(is_gameover_new: bool):
 	get_tree().paused = is_gameover_new
 
 func on_DayNightManager_day_night_changed(is_night: bool):
-	if (!is_night): # Start of every day
+	if (is_night):
 		night_counter += 1
 		emit_signal("night_count_changed", night_counter)
