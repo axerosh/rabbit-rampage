@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/bandit_death_original.wav-f778375b2d6065bce5233f49f03efb94.sample"
+
+[deps]
+
+source_file="res://audio/bandit_death_original.wav"
+dest_files=[ "res://.import/bandit_death_original.wav-f778375b2d6065bce5233f49f03efb94.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

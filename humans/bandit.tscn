@@ -7,6 +7,8 @@
 
 [node name="Bandit" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+max_health = 2
+is_enabled = true
 
 [node name="Sprite" parent="." index="2"]
 position = Vector2( 0, -14 )
@@ -14,4 +16,4 @@ texture = ExtResource( 3 )
 
 [node name="DeathSound" parent="." index="7"]
 stream = ExtResource( 4 )
-pitch_scale = 1.23
+volume_db = 1.0
