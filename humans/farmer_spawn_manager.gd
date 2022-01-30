@@ -39,7 +39,7 @@ func spawn_at_random_position() -> void:
 		if (spawn_zone.acculumated_area > roll):
 			var spawn_point: Vector2 = spawn_zone.get_point_in_zone(rng)
 			var spawned_scene: Human = scene_to_spawn.instance()
-			add_child(spawned_scene)
+			$"/root/Game/Ground".add_child(spawned_scene)
 			spawned_scene.global_position = spawn_point
 			return
 

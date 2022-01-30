@@ -55,7 +55,7 @@ func spawn_at_random_position() -> void:
 			var health_time_lookup = clamp(1, time_accumulated, time_scale) / time_scale
 			var max_health = floor(health_over_time.interpolate(health_time_lookup))
 			spawned_scene.max_health = max_health
-			add_child(spawned_scene)
+			$"/root/Game/Ground".add_child(spawned_scene)
 			spawned_scene.global_position = spawn_point
 			return
 
