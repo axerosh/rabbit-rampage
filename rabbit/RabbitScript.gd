@@ -10,31 +10,31 @@ const level_stats: Dictionary = {
 	2: {
 		flesh_required = 2,
 		attack_damage = 2,
-		attack_cost = 1,
+		attack_cost = 2,
 		speed_factor = 1.1,
 	},
 	3: {
 		flesh_required = 5,
 		attack_damage = 3,
-		attack_cost = 1,
+		attack_cost = 2,
 		speed_factor = 1.25,
 	},
 	4: {
 		flesh_required = 9,
 		attack_damage = 5,
-		attack_cost = 1,
+		attack_cost = 3,
 		speed_factor = 1.45,
 	},
 	5: {
 		flesh_required = 14,
 		attack_damage = 7,
-		attack_cost = 1,
+		attack_cost = 4,
 		speed_factor = 1.7,
 	},
 	6: {
 		flesh_required = 20,
 		attack_damage = 10,
-		attack_cost = 1,
+		attack_cost = 6,
 		speed_factor = 2.0,
 	},
 }
@@ -52,6 +52,7 @@ const base_speed: float = 10000.0
 var is_first_update: bool = true
 var level: int = 0;
 var attack_damage: int = 1
+var attack_cost: int = 1
 var speed_factor: float = 1.0
 
 
@@ -93,9 +94,9 @@ func _physics_process(delta: float) -> void:
 		
 	$HitBox.rotation_degrees = hitbox_rot_degrees
 	$HitBox.visible = monster_mode
-	if Input.is_action_just_pressed("attack") and monster_mode and current_target != null and carrots_collected > 0:
+	if Input.is_action_just_pressed("attack") and monster_mode and current_target != null and carrots_collected >= attack_cost:
 		current_target.damage(attack_damage)
-		carrots_collected -= 1
+		carrots_collected -= attack_cost
 		emit_signal("carrot_count_changed", carrots_collected)
 		$CarrotEatSound.stop()
 		$CarrotEatSound.play()
@@ -131,7 +132,7 @@ func try_evolve():
 		flesh_collected -= next_level_stats.flesh_required
 		level = next_level
 		attack_damage = next_level_stats.attack_damage
-		var attack_cost: int = next_level_stats.attack_cost
+		attack_cost = next_level_stats.attack_cost
 		speed_factor = next_level_stats.speed_factor
 		
 		next_level = level + 1
