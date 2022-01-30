@@ -23,7 +23,7 @@ var pursuers: Array = []
 func _ready() -> void:
 	GameManager.register_farmer(self)
 	var is_evil = false
-	init_health(2, is_evil)
+	init_health(is_evil)
 	var _result = connect("died", self, "on_death")
 
 func on_death(_human: Human):

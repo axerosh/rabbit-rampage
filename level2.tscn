@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://humans/spawn_zone.gd" type="Script" id=1]
 [ext_resource path="res://rabbit/Rabbit.tscn" type="PackedScene" id=2]
@@ -388,6 +388,11 @@ vertices = PoolVector2Array( 26, 439, 27, 183, 216, 183, 214.95, 226.449, 172, 4
 polygons = [ PoolIntArray( 0, 1, 2, 3, 4 ), PoolIntArray( 5, 6, 7, 8 ), PoolIntArray( 5, 8, 9, 10 ), PoolIntArray( 11, 10, 9, 12, 13, 4 ), PoolIntArray( 11, 4, 3, 14 ) ]
 outlines = [ PoolVector2Array( 172, 439, 26, 439, 27, 183, 216, 183, 214.95, 226.449, 444, 227, 444, 260, 638, 260, 846, 258, 844, 161, 1005, 161, 1006, 438, 841, 438, 843, 567, 173, 566 ) ]
 
+[sub_resource type="Curve" id=63]
+min_value = 2.0
+max_value = 10.0
+_data = [ Vector2( 0, 2 ), 0.0, 0.0, 0, 0, Vector2( 0.142857, 3.89091 ), 0.0, 0.0, 0, 0, Vector2( 0.25, 5.85455 ), 0.0, 0.0, 0, 0, Vector2( 0.361607, 4.69091 ), 0.0, 0.0, 0, 0, Vector2( 0.5, 6.87273 ), 0.0, 0.0, 0, 0, Vector2( 0.754464, 6 ), 0.0, 0.0, 0, 0, Vector2( 1, 10 ), 0.0, 0.0, 0, 0 ]
+
 [node name="Game" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -445,6 +450,7 @@ height = 70.0
 
 [node name="BanditManager" type="Node2D" parent="."]
 script = ExtResource( 6 )
+health_over_time = SubResource( 63 )
 scene_to_spawn = ExtResource( 5 )
 
 [node name="SpawnZone" type="Node2D" parent="BanditManager"]

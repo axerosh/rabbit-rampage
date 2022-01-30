@@ -1,13 +1,14 @@
 extends KinematicBody2D
 class_name Human
 
+export var max_health: int = 2
 var health: int = 2;
 export var is_enabled: bool = true
 
 signal died(human)
 var is_dead: bool = false;
 
-func init_health(max_health: int, is_evil: bool):
+func init_health(is_evil: bool):
 	health = max_health
 	$HealthBar.init(max_health, max_health, is_evil)
 

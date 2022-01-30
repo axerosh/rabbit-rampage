@@ -1,9 +1,13 @@
 extends Node2D
 class_name SpawnManager
 
+export var time_scale: float = 360
+export var health_over_time: Curve = null
 export var scene_to_spawn: PackedScene = null
 
 const time_between_spawns: float = 2.0
+
+var time_accumulated: float = 0.0
 
 var rng: RandomNumberGenerator
 var spawn_zones: Array = []
@@ -34,6 +38,7 @@ func on_DayNightManager_day_night_changed(_is_night: bool):
 	time_until_spawn = 0.0
 
 func _physics_process(delta: float) -> void:
+	time_accumulated += delta
 	if (DayNightManager.is_night):
 		time_until_spawn -= delta
 		if (time_until_spawn <= 0):
@@ -47,6 +52,9 @@ func spawn_at_random_position() -> void:
 		if (spawn_zone.acculumated_area > roll):
 			var spawn_point: Vector2 = spawn_zone.get_point_in_zone(rng)
 			var spawned_scene: Human = scene_to_spawn.instance()
+			var health_time_lookup = clamp(1, time_accumulated, time_scale) / time_scale
+			var max_health = floor(health_over_time.interpolate(health_time_lookup))
+			spawned_scene.max_health = max_health
 			add_child(spawned_scene)
 			spawned_scene.global_position = spawn_point
 			return

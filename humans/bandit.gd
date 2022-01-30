@@ -11,7 +11,7 @@ var attack_damage: int = 1
 
 func _ready() -> void:
 	var is_evil = true
-	init_health(2, is_evil)
+	init_health(is_evil)
 
 func _physics_process(delta: float) -> void:
 	if (!is_enabled):
