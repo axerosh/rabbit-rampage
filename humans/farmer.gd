@@ -19,20 +19,73 @@ var time_until_drop: float = time_between_drops
 var waiting_time: float = rand_range(min_time_waiting, max_time_waiting)
 
 var carrots_dropped: int = 0;
+var rng: RandomNumberGenerator
+
+var names: Array = [
+	"Gunnar-Gunilla",
+	"Micke-Såfia",
+	"Göran-Stina",
+	"Ing-Marie",
+	"Matildaz",
+	"Kärlz",
+	"Ärik Man-ser",
+	"Måx",
+	"Kalle-i-svängen",
+	"Peter-vid-sjön",
+	"Idé-Ida",
+	"Böjörnne",
+	"Gunilla-Bengt",
+	"Albert",
+	"Bärra",
+	"B-rit",
+	"Gunn-och-rosor",
+	"Per-Elvira",
+	"Elvis-Bertil",
+	"Knüth",
+	"Rålf",
+	"Röffe",
+	"Rälf",
+	"Räåul",
+	"Stine",
+	"Fia",
+	"Ful-Fia",
+	"Snygg-Fia",
+	"Björn",
+	"Lill-Björn",
+	"Sigörd",
+	"Fritsjiåf",
+	"Älsa-Mari",
+	"Ölf",
+	"Lars-Känt",
+	"Gön",
+	"Gåstav",
+	"Käven",
+	"Axxäl",
+	"Thëä",
+	"Tånkis",
+	"Ärvid",
+	"xXx_coolman_xXx",
+	"Mat-Tias",
+]
 
 var walk_path: PoolVector2Array = PoolVector2Array([])
 var pursuers: Array = []
 
 func _ready() -> void:
+	rng = RandomNumberGenerator.new()
+	rng.randomize()
 	GameManager.register_farmer(self)
 	var is_evil = false
 	init_health(is_evil)
 	var _result = connect("died", self, "on_death")
-	var is_female = ceil(randi() % 2) == 1
+	var is_female = ceil(rng.randi() % 2) == 1
 	if is_female:
 		$Sprite.texture = female_skin
 	else:
 		$Sprite.texture = male_skin
+	
+	var name = names[floor(rng.randi() % names.size())]
+	$Label.text = name
 
 func on_death(_human: Human):
 	drop_flesh()
