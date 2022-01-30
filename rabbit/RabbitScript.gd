@@ -152,10 +152,12 @@ func try_evolve():
 		attack_cost = next_level_stats.attack_cost
 		speed_factor = next_level_stats.speed_factor
 		
+		if (level != 1):
+			$LevelUpParticles.emitting = true
+			$LevelUpSound.stop()
+			$LevelUpSound.play()
+		
 		next_level = level + 1
-		$LevelUpParticles.emitting = true
-		$LevelUpSound.stop()
-		$LevelUpSound.play()
 		if (!level_stats.has(next_level)):
 			emit_signal("final_leveled_up", level, speed_factor, attack_damage, attack_cost)
 		else:
