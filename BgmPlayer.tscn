@@ -1,0 +1,77 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://audio/RR-Natt.mp3" type="AudioStream" id=1]
+[ext_resource path="res://audio/RR-Dag.mp3" type="AudioStream" id=2]
+[ext_resource path="res://BgmPlayer.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "FadeToDay"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Bgm Day:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -80.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Bgm Night:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -80.0 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "FadeToNight"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Bgm Day:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -80.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Bgm Night:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -80.0, 0.0 ]
+}
+
+[node name="BgmPlayer" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Bgm Day" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -80.0
+autoplay = true
+bus = "Bgm Day"
+
+[node name="Bgm Night" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+autoplay = true
+bus = "Bgm Night"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/FadeToDay = SubResource( 1 )
+anims/FadeToNight = SubResource( 2 )
