@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://images/rabbit.png" type="Texture" id=1]
 [ext_resource path="res://rabbit/RabbitScript.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://images/collectable_carrot.png" type="Texture" id=7]
 [ext_resource path="res://audio/human_flesh_chomp_solo.ogg" type="AudioStream" id=8]
 [ext_resource path="res://audio/carrot_chomp_solo.ogg" type="AudioStream" id=9]
+[ext_resource path="res://images/shadow.png" type="Texture" id=10]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -69,6 +70,13 @@ height = 24.0
 [node name="Rabbit" type="KinematicBody2D"]
 script = ExtResource( 2 )
 monster_mode = true
+
+[node name="Shadow" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.741176 )
+position = Vector2( 0, 13 )
+scale = Vector2( 1.8125, 1.8125 )
+z_index = -1
+texture = ExtResource( 10 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
