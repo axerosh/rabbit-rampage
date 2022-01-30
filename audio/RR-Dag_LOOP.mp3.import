@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/RR-Dag_LOOP.mp3-c4971f190bdebba8d442daf7789fa445.mp3str"
+
+[deps]
+
+source_file="res://audio/RR-Dag_LOOP.mp3"
+dest_files=[ "res://.import/RR-Dag_LOOP.mp3-c4971f190bdebba8d442daf7789fa445.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

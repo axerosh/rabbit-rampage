@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/RR-Natt_LOOP.mp3-2c79ed3f2156693ca35aaf100cb5fffb.mp3str"
+
+[deps]
+
+source_file="res://audio/RR-Natt_LOOP.mp3"
+dest_files=[ "res://.import/RR-Natt_LOOP.mp3-2c79ed3f2156693ca35aaf100cb5fffb.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
