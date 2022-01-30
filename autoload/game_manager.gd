@@ -29,6 +29,8 @@ func get_birth_count() -> int:
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("restart"):
+		farmers.clear()
+		night_counter = 0
 		var _error = get_tree().reload_current_scene()
 		set_gameover_status(false)
 

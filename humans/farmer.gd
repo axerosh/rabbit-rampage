@@ -105,10 +105,10 @@ func on_pursuer_died(pursuer: Human) -> void:
 
 func drop_carrot() -> void:
 	var carrot: Carrot = carrot_scene.instance();
-	get_tree().get_root().add_child(carrot);
+	get_tree().current_scene.add_child(carrot);
 	carrot.global_position = self.global_position;
 
 func drop_flesh() -> void:
 	var flesh: Flesh = flesh_scene.instance();
-	get_tree().get_root().add_child(flesh);
+	get_tree().current_scene.add_child(flesh);
 	flesh.global_position = self.global_position;
