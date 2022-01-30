@@ -11,6 +11,9 @@ const min_time_waiting: float = 0.5;
 const max_time_waiting: float = 3.5;
 const pursuer_detection_range_squared: float = 10000.0;
 
+export var female_skin: StreamTexture = preload("res://images/farmerz_2_electric_boggalooz.png");
+export var male_skin: StreamTexture = preload("res://images/farmerz.png");
+
 var time_between_drops: float = rand_range(min_time_between_drops, max_time_between_drops)
 var time_until_drop: float = time_between_drops
 var waiting_time: float = rand_range(min_time_waiting, max_time_waiting)
@@ -25,6 +28,11 @@ func _ready() -> void:
 	var is_evil = false
 	init_health(is_evil)
 	var _result = connect("died", self, "on_death")
+	var is_female = ceil(randi() % 2) == 1
+	if is_female:
+		$Sprite.texture = female_skin
+	else:
+		$Sprite.texture = male_skin
 
 func on_death(_human: Human):
 	drop_flesh()
