@@ -437,8 +437,15 @@ offset = Vector2( -1.28671, -1.14288 )
 
 [node name="Sprite2" type="Sprite" parent="CollisionLayer"]
 modulate = Color( 0, 0, 0, 0.627451 )
-position = Vector2( 268.5, 128 )
-scale = Vector2( 4.46875, 0.21875 )
+position = Vector2( 269.371, 128 )
+scale = Vector2( 4.5625, 0.21875 )
+texture = ExtResource( 14 )
+offset = Vector2( -1.28671, -1.14288 )
+
+[node name="Sprite3" type="Sprite" parent="CollisionLayer"]
+modulate = Color( 0, 0, 0, 0.627451 )
+position = Vector2( 358.948, 127.5 )
+scale = Vector2( 5.59375, 0.21875 )
 texture = ExtResource( 14 )
 offset = Vector2( -1.28671, -1.14288 )
 
