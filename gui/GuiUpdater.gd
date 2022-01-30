@@ -1,5 +1,10 @@
 extends Control
 
+func _ready():
+	var _error1 = DayNightManager.connect("day_night_changed", self, "_on_DayNightManager_day_night_changed")
+	var _error2 = GameManager.connect("night_count_changed", self, "_on_GameManager_night_count_changed")
+	var _error3 = GameManager.connect("villager_count_changed", self, "_on_GameManager_villager_count_changed")
+
 func _on_Rabbit_leveled_up(level: int, speed: float, damage: int, carrot_cost: int, next_flesh_cost: int, next_level: int, next_speed: float, next_damage: int, next_carrot_cost: int):
 	$Leveling/Current/Level/Value.text = "%d" % level
 	$Leveling/Current/GridContainer/SpeedValue.text = "%.2f" % speed
@@ -24,3 +29,19 @@ func _on_Rabbit_carrot_count_changed(new_carrot_count: int):
 
 func _on_Rabbit_flesh_count_changed(new_flesh_count: int):
 	$Leveling/LevelUp/FleshCounter/CountValue.text = "%d" % new_flesh_count
+
+func _on_DayNightManager_day_night_changed(is_night: bool):
+	if (GameManager.night_counter == 0):
+		$Time/Imminent.visible = !is_night
+		$Time/Cleared.visible = false
+	else:
+		$Time/Imminent.visible = false
+		$Time/Cleared.visible = !is_night
+
+func _on_GameManager_night_count_changed(night_count: int):
+	$Time/Night/Value.text = "%d" % night_count
+	$GameoverOverlay/Content/NightCounter/Value.text = "%d" % night_count
+
+func _on_GameManager_villager_count_changed(villager_count: int, birth_count: int):
+	$Village/VillagersValue.text = "%d" % villager_count
+	$Village/BirthsValue.text = "+%d" % birth_count

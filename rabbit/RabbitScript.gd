@@ -65,7 +65,8 @@ signal flesh_count_changed(new_flesh_count)
 
 func _ready() -> void:
 	var _result = DayNightManager.connect("day_night_changed", self, "_on_DayNightManager_day_night_changed")
-	monster_mode = DayNightManager.is_night
+	monster_mode = false
+	$Sprite.modulate = Color.white
 
 func _exit_tree() -> void:
 	DayNightManager.disconnect("day_night_changed", self, "_on_DayNightManager_day_night_changed")
@@ -113,6 +114,9 @@ func _physics_process(delta: float) -> void:
 	var _movement: Vector2 = move_and_slide(velocity * base_speed * speed_factor * delta)
 
 func _on_DayNightManager_day_night_changed(is_night: bool) -> void:
+	if (monster_mode == is_night):
+		return
+	
 	monster_mode = is_night
 	if monster_mode:
 		$AnimationPlayer.play("TurnIntoMonster")
