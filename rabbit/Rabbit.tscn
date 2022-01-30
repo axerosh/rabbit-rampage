@@ -141,7 +141,9 @@ stream = ExtResource( 9 )
 stream = ExtResource( 8 )
 
 [connection signal="carrot_count_changed" from="." to="Camera2D/CanvasLayer/GUI" method="_on_Rabbit_carrot_count_changed"]
+[connection signal="final_leveled_up" from="." to="Camera2D/CanvasLayer/GUI" method="_on_Rabbit_final_leveled_up"]
 [connection signal="flesh_count_changed" from="." to="Camera2D/CanvasLayer/GUI" method="_on_Rabbit_flesh_count_changed"]
+[connection signal="leveled_up" from="." to="Camera2D/CanvasLayer/GUI" method="_on_Rabbit_leveled_up"]
 [connection signal="area_entered" from="CollectionArea2D" to="." method="_on_CollectionArea2D_area_entered"]
 [connection signal="body_entered" from="HitBox" to="." method="_on_HitBox_body_entered"]
 [connection signal="body_exited" from="HitBox" to="." method="_on_HitBox_body_exited"]

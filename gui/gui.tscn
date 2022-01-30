@@ -14,20 +14,113 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Counters" type="VBoxContainer" parent="."]
+[node name="Leveling" type="HBoxContainer" parent="."]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 164.0
+margin_bottom = 98.0
+custom_constants/separation = 10
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CarrotCount" type="HBoxContainer" parent="Counters"]
-margin_right = 30.0
-margin_bottom = 16.0
+[node name="Current" type="VBoxContainer" parent="Leveling"]
+margin_right = 69.0
+margin_bottom = 88.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="TextureRect" type="TextureRect" parent="Counters/CarrotCount"]
+[node name="Level" type="HBoxContainer" parent="Leveling/Current"]
+margin_right = 69.0
+margin_bottom = 14.0
+
+[node name="Label" type="Label" parent="Leveling/Current/Level"]
+margin_right = 36.0
+margin_bottom = 14.0
+text = "Level"
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="Label" parent="Leveling/Current/Level"]
+margin_left = 40.0
+margin_right = 48.0
+margin_bottom = 14.0
+text = "1"
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="Leveling/Current"]
+margin_top = 18.0
+margin_right = 69.0
+margin_bottom = 68.0
+columns = 2
+
+[node name="SpeedLabel" type="Label" parent="Leveling/Current/GridContainer"]
+margin_right = 57.0
+margin_bottom = 14.0
+text = "Speed:"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpeedValue" type="Label" parent="Leveling/Current/GridContainer"]
+margin_left = 61.0
+margin_right = 69.0
+margin_bottom = 14.0
+text = "1"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DamageLabel" type="Label" parent="Leveling/Current/GridContainer"]
+margin_top = 18.0
+margin_right = 57.0
+margin_bottom = 32.0
+text = "Atk dmg:"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DamageValue" type="Label" parent="Leveling/Current/GridContainer"]
+margin_left = 61.0
+margin_top = 18.0
+margin_right = 69.0
+margin_bottom = 32.0
+text = "1"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CostLabel" type="Label" parent="Leveling/Current/GridContainer"]
+margin_top = 36.0
+margin_right = 57.0
+margin_bottom = 50.0
+text = "Atk cost:"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CarrotCount" type="HBoxContainer" parent="Leveling/Current"]
+margin_top = 72.0
+margin_right = 69.0
+margin_bottom = 88.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Unit" type="TextureRect" parent="Leveling/Current/CarrotCount"]
 margin_right = 16.0
 margin_bottom = 16.0
 texture = ExtResource( 1 )
@@ -35,7 +128,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Counters/CarrotCount"]
+[node name="CountValue" type="Label" parent="Leveling/Current/CarrotCount"]
 margin_left = 20.0
 margin_top = 1.0
 margin_right = 28.0
@@ -43,12 +136,51 @@ margin_bottom = 15.0
 text = "0"
 valign = 1
 
-[node name="FleshCounter" type="HBoxContainer" parent="Counters"]
-margin_top = 20.0
-margin_right = 30.0
-margin_bottom = 36.0
+[node name="Divider" type="Label" parent="Leveling/Current/CarrotCount"]
+margin_left = 32.0
+margin_top = 1.0
+margin_right = 37.0
+margin_bottom = 15.0
+text = "/"
+valign = 1
 
-[node name="TextureRect" type="TextureRect" parent="Counters/FleshCounter"]
+[node name="CostValue" type="Label" parent="Leveling/Current/CarrotCount"]
+margin_left = 41.0
+margin_top = 1.0
+margin_right = 49.0
+margin_bottom = 15.0
+text = "1"
+valign = 1
+
+[node name="LevelUp" type="VBoxContainer" parent="Leveling"]
+margin_left = 79.0
+margin_right = 132.0
+margin_bottom = 88.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Arrow" type="Label" parent="Leveling/LevelUp"]
+margin_top = 27.0
+margin_right = 53.0
+margin_bottom = 41.0
+text = "--------->"
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FleshCounter" type="HBoxContainer" parent="Leveling/LevelUp"]
+margin_top = 45.0
+margin_right = 53.0
+margin_bottom = 61.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Unit" type="TextureRect" parent="Leveling/LevelUp/FleshCounter"]
 margin_right = 16.0
 margin_bottom = 16.0
 texture = ExtResource( 2 )
@@ -56,13 +188,143 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Counters/FleshCounter"]
+[node name="CountValue" type="Label" parent="Leveling/LevelUp/FleshCounter"]
 margin_left = 20.0
 margin_top = 1.0
 margin_right = 28.0
 margin_bottom = 15.0
 text = "0"
 valign = 1
+
+[node name="Divider" type="Label" parent="Leveling/LevelUp/FleshCounter"]
+margin_left = 32.0
+margin_top = 1.0
+margin_right = 37.0
+margin_bottom = 15.0
+text = "/"
+valign = 1
+
+[node name="CostValue" type="Label" parent="Leveling/LevelUp/FleshCounter"]
+margin_left = 41.0
+margin_top = 1.0
+margin_right = 49.0
+margin_bottom = 15.0
+text = "2"
+valign = 1
+
+[node name="Next" type="VBoxContainer" parent="Leveling"]
+margin_left = 142.0
+margin_right = 231.0
+margin_bottom = 88.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="HBoxContainer" parent="Leveling/Next"]
+margin_right = 89.0
+margin_bottom = 14.0
+
+[node name="Label" type="Label" parent="Leveling/Next/Level"]
+margin_right = 36.0
+margin_bottom = 14.0
+text = "Level"
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="Label" parent="Leveling/Next/Level"]
+margin_left = 40.0
+margin_right = 48.0
+margin_bottom = 14.0
+text = "2"
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="Leveling/Next"]
+margin_top = 18.0
+margin_right = 89.0
+margin_bottom = 70.0
+columns = 2
+
+[node name="SpeedLabel" type="Label" parent="Leveling/Next/GridContainer"]
+margin_right = 57.0
+margin_bottom = 14.0
+text = "Speed:"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpeedValue" type="Label" parent="Leveling/Next/GridContainer"]
+margin_left = 61.0
+margin_right = 89.0
+margin_bottom = 14.0
+text = "1.1"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DamageLabel" type="Label" parent="Leveling/Next/GridContainer"]
+margin_top = 18.0
+margin_right = 57.0
+margin_bottom = 32.0
+text = "Atk dmg:"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DamageValue" type="Label" parent="Leveling/Next/GridContainer"]
+margin_left = 61.0
+margin_top = 18.0
+margin_right = 89.0
+margin_bottom = 32.0
+text = "2"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CostLabel" type="Label" parent="Leveling/Next/GridContainer"]
+margin_top = 37.0
+margin_right = 57.0
+margin_bottom = 51.0
+text = "Atk cost:"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cost" type="HBoxContainer" parent="Leveling/Next/GridContainer"]
+margin_left = 61.0
+margin_top = 36.0
+margin_right = 89.0
+margin_bottom = 52.0
+
+[node name="Value" type="Label" parent="Leveling/Next/GridContainer/Cost"]
+margin_top = 1.0
+margin_right = 8.0
+margin_bottom = 15.0
+text = "2"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Unit" type="TextureRect" parent="Leveling/Next/GridContainer/Cost"]
+margin_left = 12.0
+margin_right = 28.0
+margin_bottom = 16.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="GameoverOverlay" type="TextureRect" parent="."]
 visible = false
