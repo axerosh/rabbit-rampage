@@ -28,7 +28,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.0, -80.0 ]
+"values": [ -5.0, -80.0 ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -55,7 +55,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ -80.0, 0.0 ]
+"values": [ -80.0, -5.0 ]
 }
 
 [node name="BgmPlayer" type="Node2D"]
@@ -63,14 +63,12 @@ script = ExtResource( 3 )
 
 [node name="Bgm Day" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
-volume_db = -80.0
 autoplay = true
-bus = "Bgm Day"
 
 [node name="Bgm Night" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
+volume_db = -80.0
 autoplay = true
-bus = "Bgm Night"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/FadeToDay = SubResource( 1 )

@@ -5,7 +5,7 @@ func _ready():
 	$AnimationPlayer.playback_speed = 0.5
 	if DayNightManager.is_night:
 		$"Bgm Day".volume_db = -80
-		$"Bgm Night".volume_db = 0
+		$"Bgm Night".volume_db = -5
 	else:
 		$"Bgm Day".volume_db = 0
 		$"Bgm Night".volume_db = -80
