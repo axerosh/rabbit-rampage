@@ -19,6 +19,7 @@ func damage(damage: int) -> void:
 		is_dead = true
 		emit_signal("died", self)
 		$Sprite.visible = false
+		$Shadow.visible = false
 		is_enabled = false
 		$HealthBar.visible = false
 		$CollisionShape2D.disabled = true
