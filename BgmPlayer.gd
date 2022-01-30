@@ -9,7 +9,7 @@ func _ready():
 		$"Bgm Day".volume_db = 0
 		$"Bgm Night".volume_db = -80
 		
-	DayNightManager.connect("day_night_changed", self, "_day_night_changed")
+	var _result = DayNightManager.connect("day_night_changed", self, "_day_night_changed")
 
 func _exit_tree():
 	DayNightManager.disconnect("day_night_changed", self, "_day_night_changed")
