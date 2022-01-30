@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://images/rabbit.png" type="Texture" id=1]
 [ext_resource path="res://rabbit/RabbitScript.gd" type="Script" id=2]
@@ -41,7 +41,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1, 4.5, 5.5, 6.5, 9.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 0.454902, 0.333333, 0.054902, 0.313726 ), Color( 0.533333, 0.270588, 0.0117647, 0 ), Color( 0.32549, 0.156863, 0.65098, 0 ), Color( 0.184314, 0.0901961, 0.368627, 0.85098 ), Color( 0.0705882, 0.0588235, 0.0784314, 0.941176 ), Color( 0.0705882, 0.0588235, 0.0784314, 0.941176 ) ]
+"values": [ Color( 0.454902, 0.333333, 0.054902, 0.313726 ), Color( 0.533333, 0.270588, 0.0117647, 0 ), Color( 0.32549, 0.156863, 0.65098, 0 ), Color( 0.184314, 0.0901961, 0.368627, 0.85098 ), Color( 0.0313726, 0.027451, 0.0352941, 0.980392 ), Color( 0.0313726, 0.027451, 0.0352941, 0.980392 ) ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -66,6 +66,45 @@ tracks/1/keys = {
 [sub_resource type="CapsuleShape2D" id=4]
 radius = 6.0
 height = 24.0
+
+[sub_resource type="Curve" id=6]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -2.96212, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=7]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.794118, 0.877273 ), -0.341626, -0.341626, 0, 0, Vector2( 1, 0 ), -3.40773, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=8]
+colors = PoolColorArray( 0.392157, 0.0588235, 0.545098, 1, 1, 0, 1, 0.411765 )
+
+[sub_resource type="Animation" id=9]
+resource_name = "TurnIntoMonster"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.117647, 0.054902, 0.168627, 1 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "TurnIntoNormal"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.117647, 0.054902, 0.168627, 1 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="Rabbit" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -139,6 +178,74 @@ stream = ExtResource( 9 )
 
 [node name="FleshEatSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 8 )
+
+[node name="EatFleshParticles" type="CPUParticles2D" parent="."]
+position = Vector2( 0, 6 )
+emitting = false
+amount = 100
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.88
+randomness = 0.32
+lifetime_randomness = 0.35
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector2( 0, 1 )
+spread = 94.14
+initial_velocity = 50.0
+damping = 72.48
+angle = 212.9
+angle_random = 0.67
+scale_amount = 8.0
+scale_amount_random = 0.72
+scale_amount_curve = SubResource( 6 )
+color = Color( 0.584314, 0.105882, 0.105882, 1 )
+hue_variation = -0.08
+hue_variation_random = 0.61
+
+[node name="EatCarrotParticles" type="CPUParticles2D" parent="."]
+position = Vector2( 0, 7 )
+emitting = false
+amount = 100
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.88
+randomness = 0.32
+lifetime_randomness = 0.35
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector2( 0, 1 )
+spread = 94.14
+initial_velocity = 50.0
+damping = 72.48
+scale_amount = 4.0
+scale_amount_random = 0.72
+scale_amount_curve = SubResource( 6 )
+color = Color( 0.764706, 0.443137, 0.027451, 1 )
+hue_variation = 0.09
+hue_variation_random = 0.61
+
+[node name="LevelUpParticles" type="CPUParticles2D" parent="."]
+position = Vector2( 0, 5 )
+emitting = false
+amount = 100
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.74
+randomness = 0.38
+lifetime_randomness = 0.44
+direction = Vector2( 0, -1 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 40.0
+scale_amount = 5.0
+scale_amount_random = 0.42
+scale_amount_curve = SubResource( 7 )
+color_ramp = SubResource( 8 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/TurnIntoMonster = SubResource( 9 )
+anims/TurnIntoNormal = SubResource( 10 )
 
 [connection signal="carrot_count_changed" from="." to="Camera2D/CanvasLayer/GUI" method="_on_Rabbit_carrot_count_changed"]
 [connection signal="final_leveled_up" from="." to="Camera2D/CanvasLayer/GUI" method="_on_Rabbit_final_leveled_up"]

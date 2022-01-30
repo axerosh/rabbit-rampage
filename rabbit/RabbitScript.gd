@@ -40,6 +40,8 @@ const level_stats: Dictionary = {
 }
 
 export var monster_mode: bool = false
+export var monster_color: Color = Color.white
+
 var carrots_collected: int = 0
 var flesh_collected: int = 0
 
@@ -107,6 +109,10 @@ func _physics_process(delta: float) -> void:
 
 func _on_DayNightManager_day_night_changed(is_night: bool) -> void:
 	monster_mode = is_night
+	if monster_mode:
+		$AnimationPlayer.play("TurnIntoMonster")
+	else:
+		$AnimationPlayer.play("TurnIntoNormal")
 
 func _on_CollectionArea2D_area_entered(area: Area2D) -> void:
 	if (area is Carrot):
@@ -115,6 +121,7 @@ func _on_CollectionArea2D_area_entered(area: Area2D) -> void:
 		emit_signal("carrot_count_changed", carrots_collected)
 		$CarrotEatSound.stop()
 		$CarrotEatSound.play()
+		$EatCarrotParticles.emitting = true
 	if (area is Flesh):
 		flesh_collected += 1
 		area.queue_free()
@@ -122,6 +129,7 @@ func _on_CollectionArea2D_area_entered(area: Area2D) -> void:
 		emit_signal("flesh_count_changed", flesh_collected)
 		$FleshEatSound.stop()
 		$FleshEatSound.play()
+		$EatFleshParticles.emitting = true
 
 func try_evolve():
 	var next_level = level + 1
@@ -136,6 +144,7 @@ func try_evolve():
 		speed_factor = next_level_stats.speed_factor
 		
 		next_level = level + 1
+		$LevelUpParticles.emitting = true
 		if (!level_stats.has(next_level)):
 			emit_signal("final_leveled_up", level, speed_factor, attack_damage, attack_cost)
 		else:
