@@ -44,8 +44,10 @@ func _physics_process(delta: float) -> void:
 			closest_nearby_pursuer = pursuer
 	
 	if (closest_nearby_pursuer != null):
+		set_sweating(true)
 		move_away_from(closest_nearby_pursuer.global_position, speed * delta)
 	else:
+		set_sweating(false)
 		move_along_path(speed * delta)
 
 func move_away_from(from_point: Vector2, distance: float):
